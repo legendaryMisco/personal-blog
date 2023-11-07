@@ -1,0 +1,36 @@
+{
+  "introduction": {
+    "title": "Introduction"
+  },
+  "music-production": {
+    "title": "Music Production",
+    "pages": [
+      ["check-stereo-sends", "Check Stereo Sends"],
+      ["musicians-journey", "Musician's Journey"],
+      ["band-death", "Band Death"],
+      ["drum-tracking", "Drum Tracking"],
+      ["recording-forever-miles", "Recording Forever Miles"],
+      ["sxsw-and-new-demos", "SXSW & New Demos"]
+    ]
+  },
+  "software-development": {
+    "title": "Software Development",
+    "pages": [
+      ["new-app-idea", "New App Idea"],
+      ["answer-not-found", "Answer, Not Found"],
+      ["presigned-url", "Presigned Url"],
+      ["migration-adventure", "Migration Adventure"],
+      ["docker-up", "Docker Up"],
+      ["web-apps", "Web Apps"]
+    ]
+  },
+  "personal-reflections": {
+    "title": "Personal Reflections",
+    "pages": [
+      ["bad-day-good-day", "Bad Day, Good Day"],
+      ["new-mexico", "New Mexico"],
+      ["nostalgia", "Nostalgia"],
+      ["moving-day", "Moving Day"]
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+.vscode
+.env*
+.jwk
+
+node_modules
+generated
+
+docker
+
+pgdata

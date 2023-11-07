@@ -1,0 +1,71 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../generated/client"
+  previewFeatures = ["deno"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model artists {
+  id                     BigInt    @id @default(autoincrement())
+  created_at             DateTime? @default(now()) @db.Timestamptz(6)
+  name                   String?   @unique @db.VarChar
+  genres                 Json?     @db.Json
+  albums                 Json?     @db.Json
+  cover_art_key          String?   @db.VarChar
+  singles                Json?     @db.Json
+  user_ids               Json?     @db.Json
+  artist_id              String?   @unique @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  albums_albumsToartists albums[]
+  songs                  songs[]
+}
+
+model songs {
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  title      String?   @db.VarChar
+  owner_id   String?   @db.Uuid
+  key        String?   @db.VarChar
+  artist_id  String?   @db.Uuid
+  album_id   String?   @db.Uuid
+  song_id    String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  albums     albums?   @relation(fields: [album_id], references: [album_id], onDelete: NoAction, onUpdate: NoAction)
+  artists    artists?  @relation(fields: [artist_id], references: [artist_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model todos {
+  id         BigInt    @default(autoincrement())
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  title      String?
+  todo_id    String    @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+
+  @@id([id, todo_id])
+}
+
+model users {
+  id         BigInt    @default(autoincrement())
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  email      String?   @unique @db.VarChar
+  password   String?   @db.VarChar
+  salt       String?   @db.VarChar
+  avatar_url String?   @db.VarChar
+  user_id    String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  jwt_token  String?   @db.VarChar
+}
+
+model albums {
+  album_id   String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  name       String?   @db.VarChar
+  artist_id  String?   @db.Uuid
+  artists    artists?  @relation(fields: [artist_id], references: [artist_id], onDelete: NoAction, onUpdate: NoAction)
+  songs      songs[]
+}
+
+model organizations {
+  org_id     String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  name       String?   @db.VarChar
+}
